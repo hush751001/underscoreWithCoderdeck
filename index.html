@@ -70,14 +70,16 @@ native implementations of <b>forEach</b>, <b>map</b>, <b>reduce</b>,
 <article class='slide slide-list'>
 <h2>Collection Functions</h2>
 <h3>each</h3>
-<p>Object나 Array의 각 element의 내용으로 iterator를 호출한다.</p>
+<p>The cornerstone, an 'each' implementation, aka 'forEach'.<br/>
+Handles objects with the built-in 'forEach', arrays, and raw objects.
+</p>
 <textarea class='coder-editor'>
 <script>
 _.each([3,5,7], function(num, index, arr) {
 	$("body").append("<li> array[" + index + "]: " + num + "</li>");
 });
 
-$("body").append("<br\>");
+$("body").append("<br/>");
 
 _.each({
 		name: 'ysjung',
@@ -95,7 +97,7 @@ _.each({
 <article class='slide slide-list'>
 <h2>Collection Functions</h2>
 <h3>map</h3>
-<p>Object나 Array의 각 element의 내용으로 iterator를 호출하여 각 element의 내용에 대응하는 결과값으로 mapping한다.</p>
+<p>Return the results of applying the iterator to each element.</p>
 <textarea class='coder-editor'>
 <script>
 
@@ -108,7 +110,7 @@ _.each(result, function(num, index, arr) {
 });
 
 
-$("body").append("<br\>");
+$("body").append("<br/>");
 
 var result = _.map({
 		name: 'ysjung',
@@ -134,16 +136,239 @@ _.each(result, function(item, index, obj) {
 </textarea>
 </article>
 
+<!-- reduce -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>reduce</h3>
+<p>builds up a single result from a list of value, aka 'inject', or 'foldl'.</p>
+<textarea class='coder-editor'>
+<script>
 
+var result = _.reduce([3,5,7], function(memo, num) {
+	$("body").append("<li> memo: " + memo + ", num: " + num + "</li>");
+	return memo + num;
+},
+10 /* 초기값 */);
 
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
 
+var result = _.reduce({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(memo, item) {
+	$("body").append("<li> memo: " + memo + ", item: " + item + "</li>");
+	return memo + ", " + item;
+}, "I'm" /* 초기값 */);
 
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
 
+<!-- reduceRight -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>reduceRight</h3>
+<p>The right-associative version of reduce, also known as 'foldr'.</p>
+<textarea class='coder-editor'>
+<script>
 
+var result = _.reduceRight([3,5,7], function(memo, num) {
+	$("body").append("<li> memo: " + memo + ", num: " + num + "</li>");
+	return memo + num;
+},
+10 /* 초기값 */);
 
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
 
+var result = _.reduceRight({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(memo, item) {
+	$("body").append("<li> memo: " + memo + ", item: " + item + "</li>");
+	return memo + ", " + item;
+}, "I'm" /* 초기값 */);
 
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
 
+<!-- find -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>find</h3>
+<p>Return the first value which passes a truth test. Aliased as 'detect'.</p>
+<textarea class='coder-editor'>
+<script>
+/* 결과값은 index가 아닌 num임. */
+var result = _.find([0,1,0,4,0,5,2,5,8,2,7], function(num, index) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+	return num === 2;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+var result = _.find({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(item, index) {
+	$("body").append("<li> obj[" + index + "]: " + item + "</li>");
+	return item === '010-4052-5827';
+});
+
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
+
+<!-- filter -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>filter</h3>
+<p>Return all the elements that pass a truth test.</p>
+<textarea class='coder-editor'>
+<script>
+/* 결과값은 num의 array임. */
+var result = _.filter([0,1,0,4,0,5,2,5,8,2,7], function(num, index) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+	return num % 2 == 0;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+/* 결과값은 item의 array임. */
+var result = _.filter({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(item, index) {
+	$("body").append("<li> obj[" + index + "]: " + item + "</li>");
+	return (item.indexOf('u') > -1);
+});
+
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
+
+<!-- reject -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>reject</h3>
+<p>Return all the elements for which a truth test fails.</p>
+<textarea class='coder-editor'>
+<script>
+/* 결과값은 num의 array임. */
+var result = _.reject([0,1,0,4,0,5,2,5,8,2,7], function(num, index) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+	return num % 2 == 0;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+/* 결과값은 item의 array임. */
+var result = _.reject({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(item, index) {
+	$("body").append("<li> obj[" + index + "]: " + item + "</li>");
+	return (item.indexOf('u') > -1);
+});
+
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
+
+<!-- all -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>all</h3>
+<p>Determine whether all of the elements match a truth test.</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.all([2,4,8,9], function(num, index) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+	return num % 2 == 0;
+});
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.all([true, null, 1, 'yes'], function(item) {
+	return item;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+var result = _.all([true, null, 1, 'yes'], _.identity);
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+var result = _.all({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(item, index) {
+	$("body").append("<li> obj[" + index + "]: " + item + "</li>");
+	return item;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
+
+<!-- any -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>any</h3>
+<p>Determine if at least one element in the object matches a truth test.</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.all([2,4,8,9], function(num, index) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+	return num % 2 == 0;
+});
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.all([true, null, 1, 'yes'], function(item) {
+	return item;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+var result = _.all([true, null, 1, 'yes'], _.identity);
+
+$("body").append("<li>result : " + result + "</li>");
+$("body").append("<br/>");
+
+var result = _.all({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, function(item, index) {
+	$("body").append("<li> obj[" + index + "]: " + item + "</li>");
+	return item;
+});
+
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
 
 
 
