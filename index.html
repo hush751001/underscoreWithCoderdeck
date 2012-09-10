@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>UnderScore Sample</title>
+	<meta name="viewport" content="width=1024">
+	
+	<link rel="stylesheet" href="dist/coderdeck-core.min.css" type="text/css">
+	<link rel="stylesheet" id='style-theme-link' href="dist/coderdeck.css" type="text/css" >
+
+	<script src='dist/jquery.min.js'></script>
+	<script src="dist/modernizr.js"></script>
+</head>
+
+<body class="deck-container">
+
+<script type='text/coderdeck' id='coderdeck-default'>
+  <html>
+    <head>
+      <script src='dist/jquery.min.js'>SCRIPTEND
+	  <script src='dist/underscore.js'>SCRIPTEND
+    </head>
+    <body>
+	    CODE
+    </body>
+</html>
+</script>
+
+<article class='slide slide-subhead'>
+<h1>UNDERSCORE.JS</h1>
+</article>
+
+
+<article class='slide slide-list'>
+<h2>Introduction</h2>
+<p>
+<a href="http://github.com/documentcloud/underscore/">Underscore</a> is a
+utility-belt library for JavaScript that provides a lot of the
+functional programming support that you would expect in
+<a href="http://prototypejs.org/api">Prototype.js</a>
+(or <a href="http://www.ruby-doc.org/core/classes/Enumerable.html">Ruby</a>),
+but without extending any of the built-in JavaScript objects. It's the
+tie to go along with <a href="http://docs.jquery.com">jQuery</a>'s tux,
+and <a href="http://backbonejs.org">Backbone.js</a>'s suspenders.
+</p>
+<p>
+Underscore provides 60-odd functions that support both the usual
+functional suspects: <b>map</b>, <b>select</b>, <b>invoke</b> ?
+as well as more specialized helpers: function binding, javascript
+templating, deep equality testing, and so on. It delegates to built-in
+functions, if present, so modern browsers will use the
+native implementations of <b>forEach</b>, <b>map</b>, <b>reduce</b>,
+<b>filter</b>, <b>every</b>, <b>some</b> and <b>indexOf</b>.
+</p>
+<h3>Downloads</h3>
+<table>
+<tbody><tr>
+<td><a href="underscore.js">Development Version (1.3.3)</a></td>
+<td><i>37kb, Uncompressed with Plentiful Comments</i></td>
+</tr>
+<tr>
+<td><a href="underscore-min.js">Production Version (1.3.3)</a></td>
+<td><i>4kb, Minified and Gzipped</i></td>
+</tr>
+</tbody></table>
+</article>
+
+<!-- Collection Functions -->
+<!-- each -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>each</h3>
+<p>Object나 Array의 각 element의 내용으로 iterator를 호출한다.</p>
+<textarea class='coder-editor'>
+<script>
+_.each([3,5,7], function(num, index, arr) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+});
+
+$("body").append("<br\>");
+
+_.each({
+		name: 'ysjung',
+		phone: '010-4052-5827',
+		email: 'hush751001@gmail.com'
+	},
+	function(item, index, obj) {
+	$("body").append("<li> obj[" + index + "]: " + item +"</li>");
+});
+</script>
+</textarea>
+</article>
+
+<!-- map -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>map</h3>
+<p>Object나 Array의 각 element의 내용으로 iterator를 호출하여 각 element의 내용에 대응하는 결과값으로 mapping한다.</p>
+<textarea class='coder-editor'>
+<script>
+
+var result = _.map([3,5,7], function(num, index, arr) {
+	return num * 3;
+});
+
+_.each(result, function(num, index, arr) {
+	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+});
+
+
+$("body").append("<br\>");
+
+var result = _.map({
+		name: 'ysjung',
+		phone: '010-4052-5827',
+		email: 'hush751001@gmail.com'
+	},
+	function(item, index, obj) {
+		if(index === 'name') {
+			item = 'Yongseok, Jung';
+		}
+		else if(index === 'email') {
+			item = 'ysjung@incross.com';
+		}
+		
+		return item;
+	});
+
+_.each(result, function(item, index, obj) {
+	$("body").append("<li> obj[" + index + "]: " + item +"</li>");
+});
+
+</script>
+</textarea>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src='dist/coderdeck.min.js'></script>
+
+<script>
+	$(function() {
+		$.deck('.slide');
+	});
+</script>
+</body>
+</html>
