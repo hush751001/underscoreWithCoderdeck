@@ -370,6 +370,295 @@ $("body").append("<li>result : " + result + "</li>");
 </textarea>
 </article>
 
+<!-- include -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>include</h3>
+<p>Determine if a given value is included in the array or object using '==='.</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.include([2,4,8,9], 8);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.include({
+	name: 'ysjung',
+	phone: '010-4052-5827',
+	email: 'hush751001@gmail.com'
+}, '010-4052-5827' );
+
+$("body").append("<li>result : " + result + "</li>");
+</script>
+</textarea>
+</article>
+
+<!-- invoke -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>invoke</h3>
+<p>Invoke a method (with arguments) on every item in a collection.</p>
+<textarea class='coder-editor'>
+<script>
+
+var CPow = function(n) { this.n = n; };
+CPow.prototype.pow = function(a) {
+	return Math.pow(this.n, a);
+};
+
+var cPows = [];
+cPows[0] = new CPow(12);
+cPows[1] = new CPow(9);
+cPows[2] = new CPow(13);
+cPows[3] = new CPow(17);
+
+var result = _.invoke(cPows, 'pow', 2);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- pluck -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>pluck</h3>
+<p>Convenience version of a common use case of 'map': fetching a property.</p>
+<textarea class='coder-editor'>
+<script>
+
+var storage = [
+	{name : 'moe', age : 40},
+	{name : 'larry', age : 50},
+	{name : 'curly', age : 60}];
+
+var result = _.pluck(storage, 'name');
+	
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- max -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>max</h3>
+<p>Return the maximum element or (element-based computation).</p>
+<textarea class='coder-editor'>
+<script>
+
+var numbers = [10,28,36,14,27];
+
+var result = _.max(numbers, /* 생략해도 같은 결과 */_.identity/*function(stooge) {
+	return stooge;
+}*/);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var storage = [
+	{name : 'moe', age : 40},
+	{name : 'larry', age : 50},
+	{name : 'curly', age : 60}];
+
+var result = _.max(storage, function(stooge) {
+	return stooge.age;
+});
+	
+$("body").append("<li>result : " + result.name + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- min -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>min</h3>
+<p>Return the minimum element or (element-based computation).</p>
+<textarea class='coder-editor'>
+<script>
+
+var numbers = [10,28,36,14,27];
+
+var result = _.min(numbers, /* 생략해도 같은 결과 */_.identity/*function(stooge) {
+	return stooge;
+}*/);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var storage = [
+	{name : 'moe', age : 40},
+	{name : 'larry', age : 50},
+	{name : 'curly', age : 60}];
+
+var result = _.min(storage, function(stooge) {
+	return stooge.age;
+});
+	
+$("body").append("<li>result : " + result.name + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- sortBy -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>sortBy</h3>
+<p>Sort the object's values by a criterion produced by an iterator.</p>
+<textarea class='coder-editor'>
+<script>
+
+var numbers = [10,28,36,14,27];
+/* sort 기본동작은 오름차순, iterator에 -를 붙이면 내림차순 */
+var result = _.sortBy(numbers, /* 생략해도 같은 결과 */_.identity/*function(stooge) {
+	return stooge;
+}*/);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var storage = [
+	{name : 'moe', age : 50},
+	{name : 'larry', age : 30},
+	{name : 'curly', age : 60}];
+
+var result = _.sortBy(storage, function(stooge) {
+	return stooge.age;
+});
+
+_.each(result, function(item, index) {
+	$("body").append("<li>[" + index + "]: " + item.name + "</li>");
+});
+</script>
+</textarea>
+</article>
+
+<!-- groupBy -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>groupBy</h3>
+<p>Groups the object's values by a criterion.<br/> Pass either a string attribute to group by, or a function that returns the criterion.</p>
+<textarea class='coder-editor'>
+<script>
+
+var numbers = [1.3, 2.1, 2.4, 3.5, 1.1, 6.8, 3.1];
+
+var result = _.groupBy(numbers, function(num) {
+	return Math.floor(num);
+});
+
+_.each(result, function(item, index) {
+	$("body").append("<li>" + index + ": " + item + "</li>");
+});
+$("body").append("<br/>");
+
+var storage = [
+	{name : 'moe', age : 50},
+	{name : 'larry', age : 30},
+	{name : 'ysjung', age : 38},
+	{name : 'john', age : 29},
+	{name : 'crockford', age : 58},
+	{name : 'curly', age : 60}];
+
+var result = _.groupBy(storage, function(stooge) {
+	if(stooge.age > 38) {
+		return "oldMan";
+	}
+	else {
+		return "youngMan";
+	}
+});
+
+_.each(result, function(item, index) {
+	var log = "" + index + ": ";
+	_.each(item, function(it) {
+		log += it.name;
+		log += ", ";
+	});
+	$("body").append("<li>" + log + "</li>");	
+});
+</script>
+</textarea>
+</article>
+
+<!-- sortIndex -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>sortedIndex</h3>
+<p>Use a comparator function to figure out at what index an object should be inserted so as to maintain order. Uses binary search.</p>
+<textarea class='coder-editor'>
+<script>
+
+var numbers = [10, 20, 30, 40, 50, 60];	// sort 기본동작은 오름차순 
+//var numbers = [60, 50, 40, 30, 20, 10];
+
+var result = _.sortedIndex(numbers, 41/*, function(num) {
+	return -num;
+}*/);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- shuffle -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>shuffle</h3>
+<p>Shuffle an array.</p>
+<textarea class='coder-editor'>
+<script>
+
+var numbers = [10, 20, 30, 40, 50, 60];
+
+var result = _.shuffle(numbers);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- toArray -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>toArray</h3>
+<p>Safety convert anything iterable into a real, live array.</p>
+<textarea class='coder-editor'>
+<script>
+
+var func = function(p1, p2, p3) {
+	return _.toArray(arguments);
+};
+var result = func("cafe", "tree", 33);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- size -->
+<article class='slide slide-list'>
+<h2>Collection Functions</h2>
+<h3>size</h3>
+<p>Return the number of elements in an object.</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.size({
+	one: 1,
+	two: 2,
+	three: 3,
+	four: 4
+});
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+
+
+
 <!-- first -->
 <article class='slide slide-list'>
 <h2>Array Functions</h2>
