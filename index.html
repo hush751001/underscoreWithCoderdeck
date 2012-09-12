@@ -1158,24 +1158,77 @@ $("body").append("<li>FirstFunc() called.</li><br/>")
 <article class='slide slide-list'>
 <h2>Function Functions</h2>
 <h3><a href="http://underscorejs.org/#throttle">throttle</a></h3>
-<p>Returns a function, that, when invoked, will only be triggered at most once during a given window of time.
+<p>Returns a function, that, when invoked, will only be triggered at most once during a given window of time.<br/>
+reference site: <a href="http://benalman.com/projects/jquery-throttle-debounce-plugin/">http://benalman.com/projects/jquery-throttle-debounce-plugin/</a>
 </p>
 <textarea class='coder-editor'>
 <script>
-// _.defer는 _.delay 1ms와 동일함.
 
-var firstFunc = function() {
-	$("body").append("<li>firstFunc - start</li>");
-	_.defer(secondFunc, "Hi");
-	$("body").append("<li>firstFunc - end</li>");
+var $button1 =$("<button>button1</button>"); 
+$("body").append($button1);
+
+var button1_onClick = function(e) {
+	$("body").append("<li>Button1 Clicked</li>");
 };
 
-var secondFunc = function(message) {
-	$("body").append("<li>secondFunc : " + message + "</li><br/>");
+var button1_onClick = _.throttle(button1_onClick, 1000);
+
+$button1.click(button1_onClick);
+
+$("body").append("<li>FirstFunc() called.</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- debounce -->
+<article class='slide slide-list'>
+<h2>Function Functions</h2>
+<h3><a href="http://underscorejs.org/#debounce">debounce</a></h3>
+<p>Returns a function, that, as long as it continues to be invoked, will not be triggered. <br/>
+reference site: <a href="http://benalman.com/projects/jquery-throttle-debounce-plugin/">http://benalman.com/projects/jquery-throttle-debounce-plugin/</a>
+</p>
+<textarea class='coder-editor'>
+<script>
+
+var $button1 =$("<button>button1</button>"); 
+$("body").append($button1);
+
+var button1_onClick = function(e) {
+	$("body").append("<li>Button1 Clicked</li>");
 };
 
-firstFunc();
-$("body").append("<li>FirstFunc() called.</li><br/>")
+var button1_onClick = _.debounce(button1_onClick, 1000);
+
+$button1.click(button1_onClick);
+
+$("body").append("<li>FirstFunc() called.</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- once -->
+<article class='slide slide-list'>
+<h2>Function Functions</h2>
+<h3><a href="http://underscorejs.org/#once">once</a></h3>
+<p>Returns a function that will be executed at most one time, no matter how often you call it. Useful for lazy initialization.<br/>
+</p>
+<textarea class='coder-editor'>
+<script>
+
+var $button1 =$("<button>button1</button>"); 
+$("body").append($button1);
+
+var button1_onClick = function(e) {
+	$("body").append("<li>Button1 Clicked</li>");
+};
+
+var button1_onClick = _.debounce(button1_onClick, 1000);
+
+$button1.click(button1_onClick);
+
+$("body").append("<li>FirstFunc() called.</li><br/>");
 
 </script>
 </textarea>
