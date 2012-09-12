@@ -663,10 +663,93 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <article class='slide slide-list'>
 <h2>Array Functions</h2>
 <h3>first</h3>
-<p>Get the first element of an array. <br/>Passing **n** will return the first N values in the array.</p>
+<p>Get the first element of an array. <br/>
+Passing **n** will return the first N values in the array.</p>
+<h5>signature : function(array, n, guard)</h5>
 <textarea class='coder-editor'>
 <script>
 var result = _.first([5, 4, 3, 2, 1]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.first(['a', 4, 'e', 2, 'd'], 3);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.first(['a', 4, 'e', 2, 'd'], 3, true);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- initail -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>initial</h3>
+<p>Returns everything but the last entry of the array.<br/>
+Especcialy useful on the arguments object. <br/>
+Passing **n** will return all the values in the array, excluding the last N.</p>
+<h5>signature : function(array, n, guard)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.initial([5, 4, 3, 2, 1]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.initial([5, 4, 3, 2, 1], 3, false);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- last -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>last</h3>
+<p>Get the last element of an array.<br/>
+Passing **n** will return the last N values in the array.</p>
+<h5>signature : function(array, n, guard)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.last([5, 4, 3, 2, 1]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.last([5, 4, 3, 2, 1], 3, false);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- rest -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>rest</h3>
+<p>Returns everything but the first entry of the array.<br/>
+Especially useful on the arguments object.<br/>
+Passing an **index** will return the rest of the values in the array from that index onward.</p>
+<h5>signature : function(array, index, guard)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.rest([5, 4, 3, 2, 1]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.rest([5, 4, 3, 2, 1], 3, false);
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- compact -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>compact</h3>
+<p>Trim out all falsy values from an array.<br/>
+Returns a copy of the array with all falsy values removed.<br/>
+In JavaScript, false, null, 0, "", undefined and NaN are all falsy.</p>
+<h5>signature : function(array)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.compact([0, 1, false, 2, '', 3]);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
@@ -674,7 +757,206 @@ $("body").append("<li>result : " + result + "</li><br/>");
 </textarea>
 </article>
 
+<!-- flatten -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>flatten</h3>
+<p>Return a completely flattened version of an array.<br/>
+Flattens a nested array (the nesting can be to any depth).<br/>
+If you pass shallow, the array will only be flattened a single level.</p>
+<h5>signature : function(array, shallow)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.flatten([1, [2], [3, [[4]]]]);
 
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.flatten([1, [2], [3, [[4]]]], true);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- without -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>without</h3>
+<p>Return a version of the array that does not contain the specified value(s).<br/>
+Returns a copy of the array with all instances of the values removed. 
+=== is used for the equality test.</p>
+<h5>signature : function(array, [*values])</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- union -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>union</h3>
+<p>Produce an array that contains the union: each distinct element from all of the passed-in arrays.<br/>
+Computes the union of the passed-in arrays: the list of unique items, in order, that are present in one or more of the arrays.</p>
+<h5>signature : function()</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.union(['a', 'b', 'c'], ['c', 'd', 'e', 'f'], ['a', 'f']);
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- intersection -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>intersection</h3>
+<p>
+Produce an array that contains every item shared between all the passed-in arrays.<br/>
+Computes the list of values that are the intersection of all the arrays.<br/>
+Each value in the result is present in each of the arrays.
+</p>
+<h5>signature : function(array)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 111]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- difference -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>difference</h3>
+<p>
+Take the difference between one array and a number of other arrays.<br/>
+Only the elements present in just the first array will remain.<br/>
+Similar to without, but returns the values from array that are not present in the other arrays.
+</p>
+<h5>signature : function(array)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.difference(['a', 'b', 'c', 'd', 'e'], ['b', 'd', 'f', 'g']);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- uniq -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>uniq</h3>
+<p>Produce a duplicate-free version of the array. <br/>
+If the array has already been sorted, you have the option of using a faster algorithm.</p>
+<h5>signature : function(array, isSorted, iterator)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.uniq([1, 2, 1, 3, 1, 4], true);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.uniq([1, 2, 1, 3, 1, 4], false);
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- zip -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>zip</h3>
+<p>Zip together multiple lists into a single array -- elements that share an index go together.</p>
+<h5>signature : function()</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
+
+$("body").append("<li>result : " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- indexOf -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>indexOf</h3>
+<p>
+Returns the index at which value can be found in the array, or -1 if value is not present in the array.<br/>
+Uses the native indexOf function unless it's missing.<br/>
+If you're working with a large array, and you know that the array is already sorted, pass true for isSorted to use a faster binary search.
+</p>
+<h5>signature : function(array, item, isSorted)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.indexOf([1, 2, 3], 2);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.indexOf([1, 9, 2, 8, 3, 7, 4, 6], 4, true);
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- lastIndexOf -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>lastIndexOf</h3>
+<p>
+Returns the index of the last occurrence of value in the array, or -1 if value is not present.<br/>
+Uses the native lastIndexOf function if possible.
+</p>
+<h5>signature : function(array, item)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.lastIndexOf([1, 2, 3, 4, 5, 99], 4);
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- ranges -->
+<article class='slide slide-list'>
+<h2>Array Functions</h2>
+<h3>range</h3>
+<p>
+A function to create flexibly-numbered lists of integers, handy for 'each' and 'map' loops.<br/>
+'start', if omitted, defaults to 0;<br/>
+'step' defaults to 1.<br/>
+Returns a list of integers from 'start' to 'stop', incremented (or decremented) by 'step', exclusive.
+</p>
+<h5>signature : function(start, stop, step)</h5>
+<textarea class='coder-editor'>
+<script>
+var result = _.range(10);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.range(1, 11);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.range(0, 30, 5);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.range(0, -10, -1);
+$("body").append("<li>result : " + result + "</li><br/>");
+
+var result = _.range(0);
+$("body").append("<li>result : " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
 
 
 <script src='dist/coderdeck.min.js'></script>
