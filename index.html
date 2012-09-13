@@ -1217,18 +1217,125 @@ $("body").append("<li>FirstFunc() called.</li><br/>");
 <textarea class='coder-editor'>
 <script>
 
-var $button1 =$("<button>button1</button>"); 
-$("body").append($button1);
-
-var button1_onClick = function(e) {
-	$("body").append("<li>Button1 Clicked</li>");
+var createApplication = function() {
+	$("body").append("<li>createApplication called.</li><br/>");	
 };
 
-var button1_onClick = _.debounce(button1_onClick, 1000);
+var initialize = _.once(createApplication);
+initialize();
+initialize();
+initialize();
+initialize();
 
-$button1.click(button1_onClick);
+</script>
+</textarea>
+</article>
 
-$("body").append("<li>FirstFunc() called.</li><br/>");
+<!-- after -->
+<article class='slide slide-list'>
+<h2>Function Functions</h2>
+<h3><a href="http://underscorejs.org/#after">after</a></h3>
+<p>Return a function that will only be executed after being called N times.<br/>
+</p>
+<textarea class='coder-editor'>
+<script>
+var render = function() {
+	$("body").append("<li>render called.</li><br/>");
+};
+
+var Note = function(message, duration) {
+	this.message = message;
+	this.duration = duration;
+	this.sucess = null;
+};
+
+Note.prototype.asyncSave = function(callbacks) {
+	this.success = callbacks.success;
+	
+	_.delay(this.success, this.duration);
+};
+
+var notes = [
+	new Note("Apple", 3000),
+	new Note("Special", 1000),
+	new Note("Event", 2000)
+];
+
+var renderNotes = _.after(notes.length, render);
+
+_.each(notes, function(note) {
+	note.asyncSave({success: renderNotes});
+});
+
+</script>
+</textarea>
+</article>
+
+<!-- wrap -->
+<article class='slide slide-list'>
+<h2>Function Functions</h2>
+<h3><a href="http://underscorejs.org/#wrap">wrap</a></h3>
+<p>Returns the first function passed as an argument to the second, allowing you to adjust arguments, run code before and after,
+and conditionally execute the original function.
+</p>
+<textarea class='coder-editor'>
+<script>
+var hello = function(name) {
+	return "hello: " + name;
+};
+
+hello = _.wrap(hello, function(func) {
+	return "before, " + func("moe") + ", after";
+});
+
+var result = hello();
+$("body").append("<li>" + result + "</li><br/>");
+
+
+var wrapper = function(orgFunc) {
+
+	var args = Array.prototype.slice.call(arguments, 1);
+	var f = orgFunc.apply(this, args);
+	
+	return "choi " + f + " <= solo man";
+};
+
+var name = "naksun";
+result = name.toString();
+$("body").append("<li>original toString: " + result + "</li><br/>");
+
+String.prototype.toString = _.wrap(String.prototype.toString, wrapper);
+
+result = name.toString();
+$("body").append("<li>wrapped toString: " + result + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- compose -->
+<article class='slide slide-list'>
+<h2>Function Functions</h2>
+<h3><a href="http://underscorejs.org/#compose">compose</a></h3>
+<p>Returns a function that is the composition of a list of functions, each consuming the return value fo the function that follows.
+</p>
+<textarea class='coder-editor'>
+<script>
+// _.compose는 등록된 함수를 뒤에서 앞으로 차례대로 함수를 호출한다.
+// 이전 함수의 return 값이 다음함수의 argument로 들어가게 된다.
+// 그러므로 argument의 수는 1개로 제한된다. 최초 진입하는 맨 뒤의 함수는 예외.
+var greet = function(name) {
+	return "hi: " + name; 
+};
+
+var exclaim = function(statement, arg2) {
+	return statement + "! " + arg2; 
+};
+
+var welcome = _.compose(greet, exclaim);
+
+var result = welcome('moe', 'argument2');
+$("body").append("<li>result: " + result + "</li><br/>");
 
 </script>
 </textarea>
