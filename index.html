@@ -24,6 +24,9 @@
 <script type='text/coderdeck' id='coderdeck-default'>
   <html>
     <head>
+		<script>
+			_ = { name : "ysjung" };
+		SCRIPTEND
       <script src='lib/jquery.min.js'>SCRIPTEND
 	  <script src='lib/underscore.js'>SCRIPTEND
     </head>
@@ -170,6 +173,11 @@ native implementations of <b>forEach</b>, <b>map</b>, <b>reduce</b>,
 	<li>escape</li>
 	<li>result</li>
 	<li>template</li>
+</ul>
+<h3>Chaining</h3>
+<ul>
+	<li>chain</li>
+	<li>value</li>
 </ul>
 </div>
 </script>
@@ -352,7 +360,7 @@ var result = _.filter([0,1,0,4,0,5,2,5,8,2,7], function(num, index) {
 	return num % 2 == 0;
 });
 
-$("body").append("<li>result : " + result + "</li>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 $("body").append("<br/>");
 
 /* 결과값은 item의 array임. */
@@ -365,7 +373,7 @@ var result = _.filter({
 	return (item.indexOf('u') > -1);
 });
 
-$("body").append("<li>result : " + result + "</li>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 </script>
 </textarea>
 </article>
@@ -383,7 +391,7 @@ var result = _.reject([0,1,0,4,0,5,2,5,8,2,7], function(num, index) {
 	return num % 2 == 0;
 });
 
-$("body").append("<li>result : " + result + "</li>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 $("body").append("<br/>");
 
 /* 결과값은 item의 array임. */
@@ -396,7 +404,7 @@ var result = _.reject({
 	return (item.indexOf('u') > -1);
 });
 
-$("body").append("<li>result : " + result + "</li>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 </script>
 </textarea>
 </article>
@@ -524,7 +532,7 @@ cPows[3] = new CPow(17);
 
 var result = _.invoke(cPows, 'pow', 2);
 
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -544,7 +552,7 @@ var storage = [
 
 var result = _.pluck(storage, 'name');
 	
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -574,7 +582,7 @@ var result = _.max(storage, function(stooge) {
 	return stooge.age;
 });
 	
-$("body").append("<li>result : " + result.name + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -604,7 +612,7 @@ var result = _.min(storage, function(stooge) {
 	return stooge.age;
 });
 	
-$("body").append("<li>result : " + result.name + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -634,9 +642,7 @@ var result = _.sortBy(storage, function(stooge) {
 	return stooge.age;
 });
 
-_.each(result, function(item, index) {
-	$("body").append("<li>[" + index + "]: " + item.name + "</li>");
-});
+$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 </script>
 </textarea>
 </article>
@@ -655,10 +661,7 @@ var result = _.groupBy(numbers, function(num) {
 	return Math.floor(num);
 });
 
-_.each(result, function(item, index) {
-	$("body").append("<li>" + index + ": " + item + "</li>");
-});
-$("body").append("<br/>");
+$("body").append("<li> result : " + JSON.stringify(result) + "</li><br/>");
 
 var storage = [
 	{name : 'moe', age : 50},
@@ -677,14 +680,7 @@ var result = _.groupBy(storage, function(stooge) {
 	}
 });
 
-_.each(result, function(item, index) {
-	var log = "" + index + ": ";
-	_.each(item, function(it) {
-		log += it.name;
-		log += ", ";
-	});
-	$("body").append("<li>" + log + "</li>");	
-});
+$("body").append("<li> result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -717,13 +713,11 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <p>Shuffle an array.</p>
 <textarea class='coder-editor'>
 <script>
-
 var numbers = [10, 20, 30, 40, 50, 60];
 
 var result = _.shuffle(numbers);
 
-$("body").append("<li>result : " + result + "</li><br/>");
-
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -735,14 +729,12 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <p>Safety convert anything iterable into a real, live array.</p>
 <textarea class='coder-editor'>
 <script>
-
 var func = function(p1, p2, p3) {
 	return _.toArray(arguments);
 };
 var result = func("cafe", "tree", 33);
 
-$("body").append("<li>result : " + result + "</li><br/>");
-
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -767,9 +759,7 @@ $("body").append("<li>result : " + result + "</li><br/>");
 </textarea>
 </article>
 
-
-
-
+<!-- Array Functions -->
 <!-- first -->
 <article class='slide slide-list'>
 <h2>Array Functions</h2>
@@ -778,13 +768,13 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.first([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.first(['a', 4, 'e', 2, 'd'], 3);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.first(['a', 4, 'e', 2, 'd'], 3, true);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -798,10 +788,10 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.initial([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.initial([5, 4, 3, 2, 1], 3, false);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -815,10 +805,10 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.last([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.last([5, 4, 3, 2, 1], 3, false);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -832,10 +822,10 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.rest([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.rest([5, 4, 3, 2, 1], 3, false);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -849,7 +839,7 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <script>
 var result = _.compact([0, 1, false, 2, '', 3]);
 
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -887,7 +877,7 @@ Returns a copy of the array with all instances of the values removed.
 <script>
 var result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
 
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -902,10 +892,10 @@ Computes the union of the passed-in arrays: the list of unique items, in order, 
 <textarea class='coder-editor'>
 <script>
 var result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.union(['a', 'b', 'c'], ['c', 'd', 'e', 'f'], ['a', 'f']);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -936,10 +926,10 @@ Take the difference between one array and a number of other arrays. Only the ele
 <textarea class='coder-editor'>
 <script>
 var result = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.difference(['a', 'b', 'c', 'd', 'e'], ['b', 'd', 'f', 'g']);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -953,10 +943,10 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.uniq([1, 2, 1, 3, 1, 4], true);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.uniq([1, 2, 1, 3, 1, 4], false);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -968,9 +958,10 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <p>Zip together multiple lists into a single array -- elements that share an index go together.</p>
 <textarea class='coder-editor'>
 <script>
+
 var result = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
 
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 </script>
 </textarea>
@@ -1019,23 +1010,24 @@ A function to create flexibly-numbered lists of integers, handy for 'each' and '
 <textarea class='coder-editor'>
 <script>
 var result = _.range(10);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.range(1, 11);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.range(0, 30, 5);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.range(0, -10, -1);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.range(0);
-$("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
 </article>
 
+<!-- Function Functions -->
 <!-- bind -->
 <article class='slide slide-list'>
 <h2>Function Functions</h2>
@@ -1353,7 +1345,8 @@ _.each(notes, function(note) {
 <h2>Function Functions</h2>
 <h3><a href="http://underscorejs.org/#wrap">wrap</a></h3>
 <p>Returns the first function passed as an argument to the second, allowing you to adjust arguments, run code before and after,
-and conditionally execute the original function.
+and conditionally execute the original function.<br/>
+reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/slice">Array.slice</a>
 </p>
 <textarea class='coder-editor'>
 <script>
@@ -1418,10 +1411,778 @@ $("body").append("<li>result: " + result + "</li><br/>");
 </textarea>
 </article>
 
+<!-- Object Functions -->
+<!-- keys -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#keys">keys</a></h3>
+<p>Retrieve the names of an object's properties.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.keys({
+	one: 1,
+	two: 2,
+	three: 3
+});
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- values -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#values">values</a></h3>
+<p>Retrieve the values of an object's properties.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.values({
+	one: 1,
+	two: 2,
+	three: 3
+});
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- functions -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#object-functions">functions</a></h3>
+<p>Return a sorted list of the function names available on the object.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.functions(_);
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- extend -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#extend">extend</a></h3>
+<p>Extend a given object with all the properties in passed-in object(s).
+</p>
+<textarea class='coder-editor'>
+<script>
+var me1 = {
+	name: "ysjung",
+	phoneNumber: "010-4052-5827",
+	email: "hush751001@gmail.com",
+	age: 38
+};
+
+var me2 = {
+	name: "ysjung",
+	team: "Framework Development Team",
+	tel: "02-2101-2707",
+	email: "ysjung@incross.com"
+};
+
+var result = _.extend(me1, me2);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var object1 = {
+	apple: 0,
+	banana: {
+		weight: 52,
+		price: 100
+	},
+	cherry: 97
+};
+
+var object2 = {
+	banana: {
+		price: 200
+	},
+	durian: 100
+};
+
+var result = _.extend({}, object1, object2);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = $.extend(true, {}, object1, object2);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+</script>
+</textarea>
+</article>
+
+<!-- pick -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#pick">pick</a></h3>
+<p>Return a copy of the object only containing the whitelisted properties.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.pick({
+	name: 'moe',
+	age:50,
+	userid: 'moe1'
+}, 'name', 'age');
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- defaults -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#defaults">defaults</a></h3>
+<p>Fill in a given object with default properties.
+</p>
+<textarea class='coder-editor'>
+<script>
+// _.extend()와 유사하고 target object에서 정의되지 않은 property만 복사한다.
+
+var iceCream = {
+	flavor: "chocolate"
+};
+
+var result = _.defaults(iceCream, {
+	flavor: "vanilla",
+	sprinkles: "lots"
+});
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- clone -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#clone">clone</a></h3>
+<p>Create a (shallow-cloned) duplicate of an object.
+</p>
+<textarea class='coder-editor'>
+<script>
+
+var me1 = {
+	name: "ysjung",
+	phoneNumber: "010-4052-5827",
+	email: "hush751001@gmail.com",
+	age: 38
+};
+
+me2 = _.clone(me1);
+
+me2.name = "itswoong";
+me2.age = 36;
+me2.phoneNumber = "011-1701-xxxx";
+me2.email = "itswoong@parang.com";
+
+$("body").append("<li>me1: " + JSON.stringify(me1) + "</li><br/>");
+$("body").append("<li>me2: " + JSON.stringify(me2) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- tap -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#tap">tap</a></h3>
+<p>Invokes interceptor with the obj, and then returns obj.
+The primary purpose of this method is to "tap into" a method chain, in order to perform operations on intermediate results within the chain.
+</p>
+<textarea class='coder-editor'>
+<script>
+
+var result = _.chain([1,2,3,200])
+  .filter(function(num) { return num % 2 == 0; })
+  .tap(alert)
+  .map(function(num) { return num * num })
+  .value();
+  
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- has -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#has">has</a></h3>
+<p>Has own property?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.has({
+	a: 1,
+	b: 2,
+	c: 3
+}, "b");
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isEqual -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isEqual">isEqual</a></h3>
+<p>Perform a deep comparison to check if two objects are equal.
+</p>
+<textarea class='coder-editor'>
+<script>
+var moe = {
+	name : 'moe',
+	luckyNumbers : [13, 27, 34]
+};
+
+var clone = {
+	name : 'moe',
+	luckyNumbers : [13, 27, 34]
+};
+
+var result = (moe == clone);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = _.isEqual(moe, clone);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isEmpty -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isEmpty">isEmpty</a></h3>
+<p>Is a given array, string, or object empty? An "empty" object has no enumerable own-properties.<br/>
+reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/defineProperty">Object.defineProperty</a>
+</p>
+<textarea class='coder-editor'>
+<script>
+var moe = {
+	name : 'moe'
+};
+
+var result = _.isEmpty(moe);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+Object.defineProperty(moe, "name", {
+	enumerable: false
+});
+
+result = _.isEmpty(moe);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isElement -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isElement">isElement</a></h3>
+<p>Is a given value a DOM element?
+reference site: <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.nodeType">Node.nodeType</a>
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isElement(jQuery('body')[0]);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isArray -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isArray">isArray</a></h3>
+<p>Is a given value an array?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = (function(a, b, c){
+	return _.isArray(arguments);
+})(1, 2, 3);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = _.isArray([1,2,3]);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isObject -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isObject">isObject</a></h3>
+<p>Is a given variable an object?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isObject({});
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isObject(1);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isArguments -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isArguments">isArguments</a></h3>
+<p>Is a given variable an object?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = (function(a, b, c){
+	return _.isArguments(arguments);
+})(1, 2, 3);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = _.isArguments([1,2,3]);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isFunction -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isFunction">isFunction</a></h3>
+<p>Is a given variable an object?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isFunction(alert);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isString -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isString">isString</a></h3>
+<p>Is a given variable an object?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isString("moe");
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isNumber -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isNumber">isNumber</a></h3>
+<p>Is a given value a number?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isNumber(8.4 * 5);
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isFinite -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isFinite">isFinite</a></h3>
+<p>Is a given object a finite number?<br/>
+reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Infinity">Infinity</a>
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isFinite(-101);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isFinite(-Infinity);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isFinite(101/0);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isFinite(1000000/Infinity);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isBoolean -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isBoolean">isBoolean</a></h3>
+<p>Is a given value a boolean?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isBoolean(false);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isDate -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isDate">isDate</a></h3>
+<p>Is a given value a date?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isDate(new Date());
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isRegExp -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isRegExp">isRegExp</a></h3>
+<p>Is a given value a regular expression?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isRegExp(/moe/);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var re = new RegExp("moe");
+var result = _.isRegExp(re);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isNaN -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isNaN">isNaN</a></h3>
+<p>Is a given value 'NaN'?<br/>
+reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/NaN">NaN</a>
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isNaN(NaN);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+// undefined, 0, null, "", false
+result = _.isNaN(undefined);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = _.isNaN(parseInt("HaHa"));
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isNull -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isNull">isNull</a></h3>
+<p>Is a given value equal to null?
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.isNull(null);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isNull(undefined);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- isUndefined -->
+<article class='slide slide-list'>
+<h2>Object Functions</h2>
+<h3><a href="http://underscorejs.org/#isUndefined">isUndefined</a></h3>
+<p>Is a given value equal to null?
+</p>
+<textarea class='coder-editor'>
+<script>
+var obj1 = {
+	name: "ysjung"
+};
+
+var result = _.isUndefined(obj1.phoneNumber);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isUndefined(undefined);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.isUndefined();
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- Utility Functions -->
+<!-- noConflict -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#noConflict">noConflict</a></h3>
+<p>Run Underscore.js in *noiConflict* mode, returning the '_' variable to its previous owner. Returns a reference to the Underscore object.
+</p>
+<textarea class='coder-editor'>
+<script>
+var underscore = _.noConflict();
+$("body").append("<li>underscore: " + JSON.stringify(_) + "</li><br/>");
+
+var result = underscore.functions(underscore);
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- identity -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#identity">identity</a></h3>
+<p>Keep the identity function around for default iterators.
+</p>
+<textarea class='coder-editor'>
+<script>
+var moe = {name : 'moe'};
+var result = (moe === _.identity(moe));
+/*
+_.indentity = function(value) {
+	return value;
+}
+*/
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</textarea>
+</article>
+
+<!-- times -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#times">times</a></h3>
+<p>Run a function **n** times.
+</p>
+<textarea class='coder-editor'>
+<script>
+// 갑자기 _()는 왜 나왔나?
+_(3).times(function(index){ 
+	$("body").append("<li>[" + index + "] called.</li>");
+});
+
+$("body").append("<br/>");
+
+_.times(10, function(index) {
+	$("body").append("<li>[" + index + "] called.</li>");
+});
+</script>
+</script>
+</textarea>
+</article>
+
+<!-- mixin -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#mixin">mixin</a></h3>
+<p>Add your own custom functions to the Underscore object, ensuring that they're correctly added to the OOP wrapper as well.
+</p>
+<textarea class='coder-editor'>
+<script>
+_.mixin({
+  capitalize : function(string) {
+    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+  }
+});
+
+var result = _.capitalize("fabio");
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _("fabio").capitalize();
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</script>
+</textarea>
+</article>
+
+<!-- uniqueId -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#uniqueId">uniqueId</a></h3>
+<p>Generate a unique integer id (unique within the entire client session). Useful for temporary DOM ids.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.uniqueId('contact_');
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.uniqueId('ysjung_');
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</script>
+</textarea>
+</article>
+
+<!-- escape -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#escape">escape</a></h3>
+<p>Escape a string for HTML interpolation.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _.escape('Curly, Larry & Moe');
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</script>
+</textarea>
+</article>
+
+<!-- result -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#result">result</a></h3>
+<p>If the value of the named property is a function then invoke it; otherwise, return it.
+</p>
+<textarea class='coder-editor'>
+<script>
+var object = {
+	cheese: 'crumpets',
+	stuff: function(){
+		return 'nonsense';
+	}
+};
+
+var result = _.result(object, 'cheese');
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.result(object, 'stuff');
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</script>
+</textarea>
+</article>
+
+<!-- template -->
+<article class='slide slide-list'>
+<h2>Utility Functions</h2>
+<h3><a href="http://underscorejs.org/#template">template</a></h3>
+<p>JavaScript micro-templating, similar to John Resig's implementation. Underscore templating handles arbitrary delimiters,
+preserves whitespace, and correctly escapes quotes within interpolated code.<br/>
+reference site: <a href="http://en.wikipedia.org/wiki/ERuby#erb">ERB-style</a>, <a href="https://github.com/janl/mustache.js/">Mustache style</a>
+</p>
+<textarea class='coder-editor'>
+<script>
+/*
+_.templateSeetings = {
+// 해당 문자열을 그대로 Javascript Code로 변환
+evaluate: /<%([\s\S]+?)%>/g,
+// 해당 문자열은 variable이고 그 값을 문자열로 변환
+interpolate: /<%=([\s\S]+?)%>/g,
+// 해당 문자열은 variable이고 그 값을 escape문자열로 변환
+escape: /<%-([\s\S]+?)%>/g
+}
+*/
+var compiled = _.template("I'm <%= name %>. I've two sons.<br/>First son's name is <%= sons[0].name %>. Second son's name is <%= sons[1].name %>.");
+var result = compiled({
+	name: 'ysjung',
+	sons: [
+		{
+			name: "jhjung"		
+		},
+		{
+			name: "mwjung"
+		}
+	]
+});
+
+var a = compiled.source;
+
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var list = "<% _.each(people, function(name) { %> \
+	<li> \
+		<%= name %>	\
+	</li> \
+<% }); %>";
+	
+result = _.template(list, {
+	people: ['moe', 'curly', 'larry']
+});
+$("body").append("<li>result: <ul>" + result + "</ul></li><br/>");
 
 
+var template = _.template("<b><%- value %></b>");
+result = template({value : '<script>'});
+$("body").append("<li>result: " + result + "</li><br/>");
+</script>
+</textarea>
+</article>
 
+<!-- Chaining -->
+<!-- chain -->
+<article class='slide slide-list'>
+<h2>Chaining</h2>
+<h3><a href="http://underscorejs.org/#chain">chain</a></h3>
+<p>Add a "chain" function, which will delegate to the wrapper.
+</p>
+<textarea class='coder-editor'>
+<script>
+var stooges = [
+	{
+		name : 'curly',
+		age : 25
+	},
+	{
+		name : 'moe',
+		age : 21
+	},
+	{
+		name : 'larry',
+		age : 23
+	}
+];
 
+var youngest = _.chain(stooges)
+	.sortBy(function(stooge) {
+		return stooge.age;
+	})
+	.map(function(stooge) {
+		return stooge.name + ' is ' + stooge.age;
+	})
+	.first()
+	.value();
+
+$("body").append("<li>youngest: " + JSON.stringify(youngest) + "</li><br/>");
+</script>
+</script>
+</textarea>
+</article>
+
+<!-- value -->
+<article class='slide slide-list'>
+<h2>Chaining</h2>
+<h3><a href="http://underscorejs.org/#value">value</a></h3>
+<p>Extracts the value of a wrappered object.
+</p>
+<textarea class='coder-editor'>
+<script>
+var result = _([1, 2, 3]).value();
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+var result = _.value([1, 2, 3]);	// 없다.
+$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+</script>
+</script>
+</textarea>
+</article>
 
 
 <script src='lib/coderdeck.min.js'></script>
