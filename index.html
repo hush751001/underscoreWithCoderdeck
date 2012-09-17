@@ -689,18 +689,25 @@ $("body").append("<li> result : " + JSON.stringify(result) + "</li><br/>");
 <article class='slide slide-list'>
 <h2>Collection Functions</h2>
 <h3><a href="http://underscorejs.org/#sortIndex">sortIndex</a></h3>
-<p>Use a comparator function to figure out at what index an object should be inserted so as to maintain order. Uses binary search.</p>
+<p>Use a comparator function to figure out at what index an object should be inserted so as to maintain order. Uses binary search.<br/>
+reference site : <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/splice">Array.splice</a>
+</p>
 <textarea class='coder-editor'>
 <script>
+
+var newNumber = 41;
 
 var numbers = [10, 20, 30, 40, 50, 60];	// sort 기본동작은 오름차순 
 //var numbers = [60, 50, 40, 30, 20, 10];
 
-var result = _.sortedIndex(numbers, 41/*, function(num) {
+var result = _.sortedIndex(numbers, newNumber/*, function(num) {
 	return -num;
 }*/);
 
 $("body").append("<li>result : " + result + "</li><br/>");
+
+numbers.splice(result, 0, newNumber);
+$("body").append("<li>numbers : " + JSON.stringify(numbers) + "</li><br/>");
 
 </script>
 </textarea>
@@ -1984,7 +1991,6 @@ _.times(10, function(index) {
 	$("body").append("<li>[" + index + "] called.</li>");
 });
 </script>
-</script>
 </textarea>
 </article>
 
@@ -2008,7 +2014,6 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 var result = _("fabio").capitalize();
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </script>
-</script>
 </textarea>
 </article>
 
@@ -2026,7 +2031,6 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 var result = _.uniqueId('ysjung_');
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </script>
-</script>
 </textarea>
 </article>
 
@@ -2040,7 +2044,6 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <script>
 var result = _.escape('Curly, Larry & Moe');
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
-</script>
 </script>
 </textarea>
 </article>
@@ -2065,7 +2068,6 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.result(object, 'stuff');
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
-</script>
 </script>
 </textarea>
 </article>
@@ -2162,7 +2164,6 @@ var youngest = _.chain(stooges)
 
 $("body").append("<li>youngest: " + JSON.stringify(youngest) + "</li><br/>");
 </script>
-</script>
 </textarea>
 </article>
 
@@ -2180,8 +2181,24 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 var result = _.value([1, 2, 3]);	// 없다.
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </script>
-</script>
 </textarea>
+</article>
+
+<!-- END -->
+<article class='slide slide-subhead'>
+<h1>END</h1>
+</article>
+
+<!-- ? -->
+<article class='slide slide-list'>
+<h2>Reference</h2>
+<h3><a href="http://jquery.org/">jQuery</a></h3>
+<h3><a href="http://backbonejs.org/">Backbone.js</a></h3>
+<h3><a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf">Standard EMCA-262 3rd Edition - December 1999</a></h3>
+<h3><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">Standard ECMA-262 5.1 Edition / Jun 2011</a></h3>
+<h3><a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference">MOZILLA DEVELPOER NETWORK (MDN)</a></h3>
+<h3><a href="http://cykod.github.com/CoderDeck/">CODERDECK</a></h3>
+
 </article>
 
 
