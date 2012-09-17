@@ -19,7 +19,7 @@
 	</style>
 </head>
 
-<body class="deck-container">
+<body class="deck-container" style="padding: 0 50px;">
 
 <script type='text/coderdeck' id='coderdeck-default'>
   <html>
@@ -456,26 +456,24 @@ $("body").append("<li>result : " + result + "</li>");
 <p>Determine if at least one element in the object matches a truth test.</p>
 <textarea class='coder-editor'>
 <script>
-var result = _.all([2,4,8,9], function(num, index) {
+var result = _.any([1,3,5,8], function(num, index) {
 	$("body").append("<li> array[" + index + "]: " + num + "</li>");
 	return num % 2 == 0;
 });
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
-var result = _.all([true, null, 1, 'yes'], function(item) {
+var result = _.any([0, null, undefined, 'yes'], function(item) {
 	return item;
 });
 
-$("body").append("<li>result : " + result + "</li>");
-$("body").append("<br/>");
+$("body").append("<li>result : " + result + "</li><br/>");
 
-var result = _.all([true, null, 1, 'yes'], _.identity);
+var result = _.any([true, null, 1, 'yes'], _.identity);
 
-$("body").append("<li>result : " + result + "</li>");
-$("body").append("<br/>");
+$("body").append("<li>result : " + result + "</li><br/>");
 
-var result = _.all({
+var result = _.any({
 	name: 'ysjung',
 	phone: '010-4052-5827',
 	email: 'hush751001@gmail.com'
