@@ -13,12 +13,12 @@
       color: #d3502c;
       text-transform: none; }
   .deck-container .slide-list h2 {
-    font-size: 3.5em;
+    font-size: 2em;
     border-bottom: 4px solid #d3502c;
     padding-bottom: .07em;
     margin-bottom: .3em; }
   .deck-container .slide-list h3 {
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: #444444;
     margin-bottom: .1em; }
   .deck-container .slide-list ul {

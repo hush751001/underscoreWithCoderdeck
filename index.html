@@ -12,14 +12,14 @@
 	<script src="lib/modernizr.js"></script>
 	<style>
 	.columns {
-	  columns-count:5;
-	  -moz-column-count:5;
-	  -webkit-column-count:5;
+	  columns-count:6;
+	  -moz-column-count:6;
+	  -webkit-column-count:6;
 	}
 	</style>
 </head>
 
-<body class="deck-container" style="padding: 0 50px;">
+<body class="deck-container" style="padding: 0 20px;">
 
 <script type='text/coderdeck' id='coderdeck-default'>
   <html>
@@ -79,7 +79,7 @@ native implementations of <b>forEach</b>, <b>map</b>, <b>reduce</b>,
 <!-- each -->
 <article class='slide slide-list'>
 <h2>Underscore</h2>
-<div class="columns">
+<div class="columns" style="line-height: 22px;">
 <h3>Collections</h3>
 <ul>
 	<li>each</li>
@@ -195,18 +195,18 @@ Handles objects with the built-in 'forEach', arrays, and raw objects.
 <textarea class='coder-editor'>
 <script>
 _.each([3,5,7], function(num, index, arr) {
-	$("body").append("<li> array[" + index + "]: " + num + "</li>");
+  $("body").append("<li> array[" + index + "]: " + num + "</li>");
 });
 
 $("body").append("<br/>");
 
 _.each({
-		name: 'ysjung',
-		phone: '010-4052-5827',
-		email: 'hush751001@gmail.com'
-	},
-	function(value, key, obj) {
-	$("body").append("<li> obj[" + key + "]: " + value +"</li>");
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  },
+  function(value, key, obj) {
+    $("body").append("<li> obj[" + key + "]: " + value +"</li>");
 });
 </script>
 </textarea>
@@ -219,30 +219,30 @@ _.each({
 <p>Return the results of applying the iterator to each element.</p>
 <textarea class='coder-editor'>
 <script>
-
 var result = _.map([3,5,7], function(num, index, arr) {
-	return num * 3;
+  return num * 3;
 });
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.map({
-		name: 'ysjung',
-		phone: '010-4052-5827',
-		email: 'hush751001@gmail.com'
-	},
-	function(value, key, obj) {
-		if(key === 'name') {
-			value = 'Yongseok, Jung';
-		}
-		else if(key === 'email') {
-			value = 'ysjung@incross.com';
-		}
-		
-		return value;
-	});
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  },
+  function(value, key, obj) {
+    if(key === 'name') {
+      value = 'Yongseok, Jung';
+    }
+    else if(key === 'email') {
+      value = 'ysjung@incross.com';
+    }
+    return value;
+});
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -254,25 +254,27 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <p>builds up a single result from a list of value, aka 'inject', or 'foldl'.</p>
 <textarea class='coder-editor'>
 <script>
-
 var result = _.reduce([3,5,7], function(memo, num) {
-	$("body").append("<li> memo: " + memo + ", num: " + num + "</li>");
-	return memo + num;
-},
-10 /* 초기값 */);
+    $("body").append("<li> memo: " + memo + ", num: " + num + "</li>");
+    return memo + num;
+  },
+  10
+);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
-var result = _.reduce({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(memo, item) {
-	$("body").append("<li> memo: " + JSON.stringify(memo) + ", item: " + JSON.stringify(item) + "</li>");
-	return memo + ", " + item;
-}, "I'm" /* 초기값 */);
+var result = _.reduce({name: 'ysjung', phone: '010-4052-5827', email: 'hush751001@gmail.com'},
+  function(memo, item) {
+    var m = JSON.stringify(memo);
+    var i = JSON.stringify(item);
+    $("body").append("<li> memo: " + m + ", item: " + i + "</li>");
+    return memo + ", " + item;
+  },
+  "I'm"
+);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -284,25 +286,27 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 <p>The right-associative version of reduce, also known as 'foldr'.</p>
 <textarea class='coder-editor'>
 <script>
-
 var result = _.reduceRight([3,5,7], function(memo, num) {
-	$("body").append("<li> memo: " + memo + ", num: " + num + "</li>");
-	return memo + num;
-},
-10 /* 초기값 */);
+    $("body").append("<li> memo: " + memo + ", num: " + num + "</li>");
+    return memo + num;
+  },
+  10
+);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
-var result = _.reduceRight({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(memo, item) {
-	$("body").append("<li> memo: " + JSON.stringify(memo) + ", item: " + JSON.stringify(item) + "</li>");
-	return memo + ", " + item;
-}, "I'm" /* 초기값 */);
+var result = _.reduceRight({name: 'ysjung', phone: '010-4052-5827', email: 'hush751001@gmail.com'},
+  function(memo, item) {
+    var m = JSON.stringify(memo);
+    var i = JSON.stringify(item);
+    $("body").append("<li> memo: " + m + ", item: " + i + "</li>");
+    return memo + ", " + item;
+  },
+  "I'm"
+);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -316,19 +320,20 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 <script>
 /* 결과값은 index가 아닌 value임. */
 var result = _.find([0,1,0,4,0,5,2,5,8,2,7], function(value, index) {
-	$("body").append("<li> array[" + index + "]: " + value + "</li>");
-	return (value % 3) === 2;
+  $("body").append("<li> array[" + index + "]: " + value + "</li>");
+  return (value % 3) === 2;
 });
 
-  $("body").append("<li>result : " + result + "</li><br/>");
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.find({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(value, key) {
-	$("body").append("<li> obj[" + key + "]: " + value + "</li>");
-	return value === '010-4052-5827';
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  },
+  function(value, key) {
+    $("body").append("<li> obj[" + key + "]: " + value + "</li>");
+    return value === '010-4052-5827';
 });
 
 $("body").append("<li>result : " + result + "</li>");
@@ -345,23 +350,26 @@ $("body").append("<li>result : " + result + "</li>");
 <script>
 /* 결과값은 value의 array임. */
 var result = _.filter([0,1,0,4,0,5,2,5,8,2,7], function(value, index) {
-	$("body").append("<li> array[" + index + "]: " + value + "</li>");
-	return (value % 2) === 0;
+  $("body").append("<li> array[" + index + "]: " + value + "</li>");
+  return (value % 2) === 0;
 });
 
-  $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 /* 결과값은 value의 array임. */
 var result = _.filter({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(value, key) {
-	$("body").append("<li> obj[" + key + "]: " + value + "</li>");
-	return (value.indexOf('u') > -1);
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  },
+  function(value, key) {
+    $("body").append("<li> obj[" + key + "]: " + value + "</li>");
+    return (value.indexOf('u') > -1);
 });
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -375,23 +383,25 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 <script>
 /* 결과값은 value의 array임. */
 var result = _.reject([0,1,0,4,0,5,2,5,8,2,7], function(value, index) {
-	$("body").append("<li> array[" + index + "]: " + value + "</li>");
-	return (value % 2) === 0;
+  $("body").append("<li> array[" + index + "]: " + value + "</li>");
+  return (value % 2) === 0;
 });
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 /* 결과값은 value의 array임. */
 var result = _.reject({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(value, key) {
-	$("body").append("<li> obj[" + key + "]: " + value + "</li>");
-	return (value.indexOf('u') > -1);
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  }, function(value, key) {
+    $("body").append("<li> obj[" + key + "]: " + value + "</li>");
+    return (value.indexOf('u') > -1);
 });
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -404,14 +414,14 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 <textarea class='coder-editor'>
 <script>
 var result = _.all([2,4,8,9], function(value, index) {
-	$("body").append("<li> array[" + index + "]: " + value + "</li>");
-	return (value % 2) === 0;
+  $("body").append("<li> array[" + index + "]: " + value + "</li>");
+  return (value % 2) === 0;
 });
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.all([true, null, 1, 'yes'], function(value) {
-	return value;
+  return value;
 });
 
 $("body").append("<li>result : " + result + "</li><br/>");
@@ -421,12 +431,12 @@ var result = _.all([true, null, 1, 'yes'], _.identity);
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.all({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(value, key) {
-	$("body").append("<li> obj[" + key + "]: " + value + "</li>");
-	return value;
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  }, function(value, key) {
+    $("body").append("<li> obj[" + key + "]: " + value + "</li>");
+    return value;
 });
 
 $("body").append("<li>result : " + result + "</li>");
@@ -442,14 +452,14 @@ $("body").append("<li>result : " + result + "</li>");
 <textarea class='coder-editor'>
 <script>
 var result = _.any([1,3,5,8], function(value, index) {
-	$("body").append("<li> array[" + index + "]: " + value + "</li>");
-	return (value % 2) === 0;
+  $("body").append("<li> array[" + index + "]: " + value + "</li>");
+  return (value % 2) === 0;
 });
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.any([0, null, undefined, 'yes'], function(value) {
-	return value;
+  return value;
 });
 
 $("body").append("<li>result : " + result + "</li><br/>");
@@ -459,12 +469,12 @@ var result = _.any([true, null, 1, 'yes'], _.identity);
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.any({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, function(value, key) {
-	$("body").append("<li> obj[" + key + "]: " + value + "</li>");
-	return value;
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  }, function(value, key) {
+    $("body").append("<li> obj[" + key + "]: " + value + "</li>");
+    return value;
 });
 
 $("body").append("<li>result : " + result + "</li>");
@@ -484,10 +494,11 @@ var result = _.include([2,4,8,9], 8);
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.include({
-	name: 'ysjung',
-	phone: '010-4052-5827',
-	email: 'hush751001@gmail.com'
-}, '010-4052-5827' );
+    name: 'ysjung',
+    phone: '010-4052-5827',
+    email: 'hush751001@gmail.com'
+  },
+  '010-4052-5827');
 
 $("body").append("<li>result : " + result + "</li>");
 </script>
@@ -501,10 +512,9 @@ $("body").append("<li>result : " + result + "</li>");
 <p>Invoke a method (with arguments) on every item in a collection.</p>
 <textarea class='coder-editor'>
 <script>
-
 var CPow = function(n) { this.n = n; };
 CPow.prototype.pow = function(a) {
-	return Math.pow(this.n, a);
+  return Math.pow(this.n, a);
 };
 
 var cPows = [];
@@ -515,7 +525,8 @@ cPows[3] = new CPow(17);
 
 var result = _.invoke(cPows, 'pow', 2);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -527,17 +538,18 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <p>Convenience version of a common use case of 'map': fetching a property.</p>
 <textarea class='coder-editor'>
 <script>
-
 var storage = [
-	{name : 'seoghwan', age : 29},
-	{name : 'ysjung', age : 38},
-  	{name : 's2junn', age : 30},
-	{name : 'naksun', age : 34},
-	{name : 'itswoong', age : 36}];
+  {name : 'seoghwan', age : 29},
+  {name : 'ysjung', age : 38},
+  {name : 's2junn', age : 30},
+  {name : 'naksun', age : 34},
+  {name : 'itswoong', age : 36}
+];
 
 var result = _.pluck(storage, 'name');
 	
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -549,27 +561,28 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <p>Return the maximum element or (element-based computation).</p>
 <textarea class='coder-editor'>
 <script>
-
 var numbers = [10,28,36,14,27];
 
 var result = _.max(numbers, /* 생략해도 같은 결과 */_.identity/*function(stooge) {
-	return stooge;
+  return stooge;
 }*/);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var storage = [
-	{name : 'seoghwan', age : 29},
-	{name : 'ysjung', age : 38},
-  	{name : 's2junn', age : 30},
-	{name : 'naksun', age : 34},
-	{name : 'itswoong', age : 36}];
+  {name : 'seoghwan', age : 29},
+  {name : 'ysjung', age : 38},
+  {name : 's2junn', age : 30},
+  {name : 'naksun', age : 34},
+  {name : 'itswoong', age : 36}
+];
 
 var result = _.max(storage, function(stooge) {
-	return stooge.age;
+  return stooge.age;
 });
-	
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -581,27 +594,28 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <p>Return the minimum element or (element-based computation).</p>
 <textarea class='coder-editor'>
 <script>
-
 var numbers = [10,28,36,14,27];
 
 var result = _.min(numbers, /* 생략해도 같은 결과 */_.identity/*function(stooge) {
-	return stooge;
+  return stooge;
 }*/);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var storage = [
-	{name : 'seoghwan', age : 29},
-	{name : 'ysjung', age : 38},
-  	{name : 's2junn', age : 30},
-	{name : 'naksun', age : 34},
-	{name : 'itswoong', age : 36}];
+  {name : 'seoghwan', age : 29},
+  {name : 'ysjung', age : 38},
+  {name : 's2junn', age : 30},
+  {name : 'naksun', age : 34},
+  {name : 'itswoong', age : 36}
+];
 
 var result = _.min(storage, function(stooge) {
-	return stooge.age;
+  return stooge.age;
 });
 	
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -617,23 +631,25 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 var numbers = [10,28,36,14,27];
 /* sort 기본동작은 오름차순, iterator에 -를 붙이면 내림차순 */
 var result = _.sortBy(numbers, /* 생략해도 같은 결과 */_.identity/*function(stooge) {
-	return stooge;
+  return stooge;
 }*/);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
 var storage = [
-	{name : 'seoghwan', age : 29},
-	{name : 'ysjung', age : 38},
-  	{name : 's2junn', age : 30},
-	{name : 'naksun', age : 34},
-	{name : 'itswoong', age : 36}];
+  {name : 'seoghwan', age : 29},
+  {name : 'ysjung', age : 38},
+  {name : 's2junn', age : 30},
+  {name : 'naksun', age : 34},
+  {name : 'itswoong', age : 36}
+];
 
 var result = _.sortBy(storage, function(stooge) {
-	return stooge.age;
+  return stooge.age;
 });
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -645,32 +661,34 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 <p>Groups the object's values by a criterion. Pass either a string attribute to group by, or a function that returns the criterion.</p>
 <textarea class='coder-editor'>
 <script>
-
 var numbers = [1.3, 2.1, 2.4, 3.5, 1.1, 6.8, 3.1];
 
 var result = _.groupBy(numbers, function(num) {
-	return Math.floor(num);
+  return Math.floor(num);
 });
 
-$("body").append("<li> result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var storage = [
-	{name : 'seoghwan', age : 29},
-	{name : 'ysjung', age : 38},
-  	{name : 's2junn', age : 30},
-	{name : 'naksun', age : 34},
-	{name : 'itswoong', age : 36}];
+  {name : 'seoghwan', age : 29},
+  {name : 'ysjung', age : 38},
+  {name : 's2junn', age : 30},
+  {name : 'naksun', age : 34},
+  {name : 'itswoong', age : 36}
+];
 
 var result = _.groupBy(storage, function(stooge) {
-	if(stooge.age > 33) {
-		return "oldMan";
-	}
-	else {
-		return "youngMan";
-	}
+  if(stooge.age > 33) {
+    return "oldMan";
+  }
+  else {
+    return "youngMan";
+  }
 });
 
-$("body").append("<li> result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -684,21 +702,21 @@ reference site : <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Re
 </p>
 <textarea class='coder-editor'>
 <script>
-
 var newNumber = 41;
 
 var numbers = [10, 20, 30, 40, 50, 60];	// sort 기본동작은 오름차순 
 //var numbers = [60, 50, 40, 30, 20, 10];
 
 var result = _.sortedIndex(numbers, newNumber/*, function(num) {
-	return -num;
+  return -num;
 }*/);
 
 $("body").append("<li>result : " + result + "</li><br/>");
 
 numbers.splice(result, 0, newNumber);
-$("body").append("<li>numbers : " + JSON.stringify(numbers) + "</li><br/>");
 
+numbers = JSON.stringify(numbers);
+$("body").append("<li>numbers : " + numbers + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -714,7 +732,8 @@ var numbers = [10, 20, 30, 40, 50, 60];
 
 var result = _.shuffle(numbers);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -727,11 +746,12 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var func = function(p1, p2, p3) {
-	return _.toArray(arguments);
+  return _.toArray(arguments);
 };
 var result = func("cafe", "tree", 33);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -744,14 +764,14 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.size({
-	one: 1,
-	two: 2,
-	three: 3,
-	four: 4
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4
 });
 
+result = JSON.stringify(result);
 $("body").append("<li>result : " + result + "</li><br/>");
-
 </script>
 </textarea>
 </article>
@@ -765,10 +785,14 @@ $("body").append("<li>result : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.first([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.first(['a', 4, 'e', 2, 'd'], 3);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -781,11 +805,14 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.initial([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.initial([5, 4, 3, 2, 1], 3);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -798,11 +825,14 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.last([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.last([5, 4, 3, 2, 1], 3);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -815,10 +845,14 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.rest([5, 4, 3, 2, 1]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.rest([5, 4, 3, 2, 1], 3);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -832,8 +866,8 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <script>
 var result = _.compact([0, 1, false, 2, '', 3]);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
-
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -848,13 +882,14 @@ If you pass shallow, the array will only be flattened a single level.</p>
 <textarea class='coder-editor'>
 <script>
 var result = _.flatten([1, [2], [3, [[4]]]]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 
-$("body").append("<br/>");    
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.flatten([1, [2], [3, [[4]]]], true);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li>");
 
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -870,8 +905,8 @@ Returns a copy of the array with all instances of the values removed.
 <script>
 var result = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
-
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -885,10 +920,14 @@ Computes the union of the passed-in arrays: the list of unique items, in order, 
 <textarea class='coder-editor'>
 <script>
 var result = _.union([1, 2, 3], [101, 2, 1, 10], [2, 1]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.union(['a', 'b', 'c'], ['c', 'd', 'e', 'f'], ['a', 'f']);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -903,8 +942,9 @@ Produce an array that contains every item shared between all the passed-in array
 <textarea class='coder-editor'>
 <script>
 var result = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 111]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -919,11 +959,14 @@ Take the difference between one array and a number of other arrays. Only the ele
 <textarea class='coder-editor'>
 <script>
 var result = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.difference(['a', 'b', 'c', 'd', 'e'], ['b', 'd', 'f', 'g']);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -936,10 +979,14 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.uniq([1, 2, 1, 3, 1, 4]);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
   
 var result = _.uniq([1, 1, 2, 2, 3, 3, 4, 7], true);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -952,11 +999,13 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.zip(
-	['seoghwan', 'ysjung', 's2junn', 'naksun', 'itswoong'],
-	[29, 38, 30, 34, 36],
-	[true, false, true, false, false]);
+  ['seoghwan', 'ysjung', 's2junn', 'naksun', 'itswoong'],
+  [29, 38, 30, 34, 36],
+  [true, false, true, false, false]
+);
 
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -970,10 +1019,14 @@ Returns the index at which value can be found in the array, or -1 if value is no
 </p>
 <textarea class='coder-editor'>
 <script>
-var result = _.indexOf([3, 6, 9, 12, 3, 6, 9, 13], 9);
+var result = _.indexOf([3, 6, 9, 12, 3, 6, 9, 13], 12);
+
+result = JSON.stringify(result);
 $("body").append("<li>result : " + result + "</li><br/>");
 
-var result = _.indexOf([1, 2, 6, 8, 12, 32, 89, 120], 6, true );
+var result = _.indexOf([1, 2, 6, 8, 12, 32, 89, 120], 32, true );
+
+result = JSON.stringify(result);
 $("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
@@ -989,6 +1042,8 @@ Returns the index of the last occurrence of value in the array, or -1 if value i
 <textarea class='coder-editor'>
 <script>
 var result = _.lastIndexOf([3, 6, 9, 12, 3, 6, 9, 13], 9);
+
+result = JSON.stringify(result);
 $("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
@@ -1004,19 +1059,29 @@ A function to create flexibly-numbered lists of integers, handy for 'each' and '
 <textarea class='coder-editor'>
 <script>
 var result = _.range(10);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.range(1, 11);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.range(0, 30, 5);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.range(0, -10, -1);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var result = _.range(0);
-$("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1031,29 +1096,37 @@ $("body").append("<li>result : " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var Member = function(name) {
-	this.name = name;
+  this.name = name;
 }
 
 Member.prototype.func = function(greeting, message) {
-	return greeting + ": [" + this.name + "], " + message;
+  return greeting + ": [" + this.name + "], " + message;
 };
 
 var member = new Member("ysjung");
 var result = member.func('hello', 'message1');
-$("body").append("<li>member.func() : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 var func = member.func;
 result = func('hahaha', 'message2');
-$("body").append("<li>func() : " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 func = _.bind(Member.prototype.func, {name: 'itswoong'});
 result = func('wow', 'message3');
-$("body").append("<li>func() : " + result + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 
 // currying using bind()
 var curryingFunc = _.bind(Member.prototype.func, {name: 'naksun'}, 'olleh');
 result = curryingFunc('message4');
-$("body").append("<li>curryingFunc() : " + result + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result : " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1065,21 +1138,24 @@ $("body").append("<li>curryingFunc() : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var Button = function(name) {
-	this.name = name;
+  this.name = name;
 };
 
 Button.prototype.onClick = function(e) {
-	alert(this.name);
+  alert(this.name);
 };
 
 var Layoutview = function(name) {
-	this.name = name;
-  	this.button1 = new Button("button1");
-  	var $button1 =$("<button>button1</button>"); 
-  	$("body").append($button1);
-  	this.button1.onClick = _.bind(this.button1.onClick, this);
+  this.name = name;
+  this.button1 = new Button("button1");
+  var $button1 =$("<button>button1</button>"); 
+  $("body").append($button1);
+  
+  this.button1.onClick = _.bind(this.button1.onClick, this);
   //this.button1.onClick = _.bind(this.button1.onClick, this.button1);
-  	$button1.click(this.button1.onClick);
+  //$button1[0].name = "HTMLButtonElement1";
+  
+  $button1.click(this.button1.onClick);
 };
 
 var layoutview1 = new Layoutview("layoutview1");
@@ -1096,45 +1172,62 @@ var layoutview1 = new Layoutview("layoutview1");
 <textarea class='coder-editor'>
 <script>
 var Member = function(name) {
-	this.name = name;
+  this.name = name;
 };
 
 Member.prototype.func1 = function(greeting) {
-	return greeting + ": [" + this.name + "]";
+  return greeting + ": [" + this.name + "]";
 };
 
 Member.prototype.func2 = function(greeting) {
-	return this.name + ": [" + greeting + "]";
+  return this.name + ": [" + greeting + "]";
 };
 
 var ysjung = new Member('ysjung');
 var itswoong = new Member('itswoong');
 
 var result = ysjung.func1('hi');
-$("body").append("<li>ysjung.func1('hi') : " + JSON.stringify(result) + "</li>");
+
+result = JSON.stringify(result);
+$("body").append("<li>ysjung.func1('hi') : " + result + "</li><br/>");
+
 result = itswoong.func1('hello');
-$("body").append("<li>itswoong.func1('hello') : " + JSON.stringify(result) + "</li><br/>");
 
-var func = ysjung.func1;
-result = func('hi');	// call시 this가 window이므로 this.name이 없음.
-$("body").append("<li>func('hi') : " + result + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>itswoong.func1('hello') : " + result + "</li><br/>");
 
-ysjung.func1 = _.bind(ysjung.func1, ysjung);
-ysjung.func2 = _.bind(ysjung.func2, ysjung);
-//_.bindAll(ysjung, 'func1', 'func2');
+var func1 = ysjung.func1;
+result = func1('hi');	// call시 this가 window이므로 this.name이 없음.
+
+result = JSON.stringify(result);
+$("body").append("<li>func1 : " + result + "</li><br/>");
+
+$("body").append("<hr><br/>");
+
+_.bindAll(ysjung, 'func1', 'func2');
+
+//ysjung.func1 = _.bind(ysjung.func1, ysjung);
+//ysjung.func2 = _.bind(ysjung.func2, ysjung);
+
 //_.bindAll(ysjung);
 
-func = ysjung.func1;
-result = func('hoho');
-$("body").append("<li>func('hoho') : " + JSON.stringify(result) + "</li>");
+var func1 = ysjung.func1;
+result = func1('hoho');
 
-func = ysjung.func2;
-result = func('haha');
-$("body").append("<li>func('haha') : " + JSON.stringify(result) + "</li>");
+result = JSON.stringify(result);
+$("body").append("<li>func1 : " + result + "</li><br/>");
 
-func = itswoong.func1;
-result = func('wow');
-$("body").append("<li>func('wow') : " + JSON.stringify(result) + "</li>");
+var func2 = ysjung.func2;
+result = func2('haha');
+
+result = JSON.stringify(result);
+$("body").append("<li>func2 : " + result + "</li><br/>");
+
+var func1 = itswoong.func1;
+result = func1('wow');
+
+result = JSON.stringify(result);
+$("body").append("<li>func1 : " + result + "</li><br/>");
 
 </script>
 </textarea>
@@ -1181,12 +1274,11 @@ $("body").append("<li>fibonacci(2999) : " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var after1000ms = function(message) {
-	$("body").append("<li>after1000ms() " + message + "</li><br/>");    
+  $("body").append("<li>after1000ms() " + message + "</li><br/>");    
 };
 
 _.delay(after1000ms, 1000, "call!");
-$("body").append("<li>_.delay() called.</li><br/>")
-
+$("body").append("<li>_.delay() called.</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1202,18 +1294,17 @@ $("body").append("<li>_.delay() called.</li><br/>")
 // _.defer는 _.delay 1ms와 동일함.
 
 var firstFunc = function() {
-	$("body").append("<li>firstFunc - start</li>");
-	_.defer(secondFunc, "Hi");
-	$("body").append("<li>firstFunc - end</li>");
+  $("body").append("<li>firstFunc - start</li>");
+  _.defer(secondFunc, "Hi");
+  $("body").append("<li>firstFunc - end</li>");
 };
 
 var secondFunc = function(message) {
-	$("body").append("<li>secondFunc : " + message + "</li><br/>");
+  $("body").append("<li>secondFunc : " + message + "</li><br/>");
 };
 
 firstFunc();
-$("body").append("<li>FirstFunc() called.</li><br/>")
-
+$("body").append("<li>FirstFunc() called.</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1227,20 +1318,16 @@ reference site: <a href="http://benalman.com/projects/jquery-throttle-debounce-p
 </p>
 <textarea class='coder-editor'>
 <script>
-
-var $button1 =$("<button>button1</button>"); 
+var $button1 = $("<button>button1</button>"); 
 $("body").append($button1);
 
 var button1_onClick = function(e) {
-	$("body").append("<li>Button1 Clicked</li>");
+  $("body").append("<li>Button1 Clicked</li>");
 };
 
 var button1_onClick = _.throttle(button1_onClick, 1000);
 
 $button1.click(button1_onClick);
-
-$("body").append("<li>FirstFunc() called.</li><br/>");
-
 </script>
 </textarea>
 </article>
@@ -1254,20 +1341,16 @@ reference site: <a href="http://benalman.com/projects/jquery-throttle-debounce-p
 </p>
 <textarea class='coder-editor'>
 <script>
-
 var $button1 =$("<button>button1</button>"); 
 $("body").append($button1);
 
 var button1_onClick = function(e) {
-	$("body").append("<li>Button1 Clicked</li>");
+  $("body").append("<li>Button1 Clicked</li>");
 };
 
 var button1_onClick = _.debounce(button1_onClick, 1000);
 
 $button1.click(button1_onClick);
-
-$("body").append("<li>FirstFunc() called.</li><br/>");
-
 </script>
 </textarea>
 </article>
@@ -1282,7 +1365,7 @@ $("body").append("<li>FirstFunc() called.</li><br/>");
 <script>
 
 var createApplication = function() {
-	$("body").append("<li>createApplication called.</li><br/>");	
+  $("body").append("<li>createApplication called.</li><br/>");	
 };
 
 var initialize = _.once(createApplication);
@@ -1304,33 +1387,32 @@ initialize();
 <textarea class='coder-editor'>
 <script>
 var render = function() {
-	$("body").append("<li>render called.</li><br/>");
+  $("body").append("<li>render called.</li><br/>");
 };
 
 var Note = function(message, duration) {
-	this.message = message;
-	this.duration = duration;
-	this.sucess = null;
+  this.message = message;
+  this.duration = duration;
+  this.sucess = null;
 };
 
 Note.prototype.asyncSave = function(callbacks) {
-	this.success = callbacks.success;
-	
-	_.delay(this.success, this.duration);
+  this.success = callbacks.success;
+
+  _.delay(this.success, this.duration);
 };
 
 var notes = [
-	new Note("Apple", 3000),
-	new Note("Special", 1000),
-	new Note("Event", 2000)
+  new Note("Apple", 3000),
+  new Note("Special", 1000),
+  new Note("Event", 2000)
 ];
 
 var renderNotes = _.after(notes.length, render);
 
 _.each(notes, function(note) {
-	note.asyncSave({success: renderNotes});
+  note.asyncSave({success: renderNotes});
 });
-
 </script>
 </textarea>
 </article>
@@ -1346,23 +1428,21 @@ reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Ref
 <textarea class='coder-editor'>
 <script>
 var hello = function(name) {
-	return "hello: " + name;
+  return "hello: " + name;
 };
 
 hello = _.wrap(hello, function(func) {
-	return "before, " + func("moe") + ", after";
+  return "before, " + func("ysjung") + ", after";
 });
 
 var result = hello();
 $("body").append("<li>" + result + "</li><br/>");
 
-
 var wrapper = function(orgFunc) {
-
-	var args = Array.prototype.slice.call(arguments, 1);
-	var f = orgFunc.apply(this, args);
+  var args = Array.prototype.slice.call(arguments, 1);
+  var f = orgFunc.apply(this, args);
 	
-	return "choi " + f + " <= solo man";
+  return "choi " + f + " <= solo man";
 };
 
 var name = "naksun";
@@ -1373,7 +1453,6 @@ String.prototype.toString = _.wrap(String.prototype.toString, wrapper);
 
 result = name.toString();
 $("body").append("<li>wrapped toString: " + result + "</li><br/>");
-
 </script>
 </textarea>
 </article>
@@ -1390,18 +1469,19 @@ $("body").append("<li>wrapped toString: " + result + "</li><br/>");
 // 이전 함수의 return 값이 다음함수의 argument로 들어가게 된다.
 // 그러므로 argument의 수는 1개로 제한된다. 최초 진입하는 맨 뒤의 함수는 예외.
 var greet = function(name) {
-	return "hi: " + name; 
+  return "hi: " + name; 
 };
 
 var exclaim = function(statement, arg2) {
-	return statement + "! " + arg2; 
+  return statement + "! " + arg2; 
 };
 
 var welcome = _.compose(greet, exclaim);
 
-var result = welcome('moe', 'argument2');
-$("body").append("<li>result: " + result + "</li><br/>");
+var result = welcome('ysjung', 'argument2');
 
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1416,12 +1496,13 @@ $("body").append("<li>result: " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.keys({
-	one: 1,
-	two: 2,
-	three: 3
+  one: 1,
+  two: 2,
+  three: 3
 });
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1435,12 +1516,13 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.values({
-	one: 1,
-	two: 2,
-	three: 3
+  one: 1,
+  two: 2,
+  three: 3
 });
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1455,7 +1537,8 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <script>
 var result = _.functions(_);
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1469,44 +1552,49 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var me1 = {
-	name: "ysjung",
-	phoneNumber: "010-4052-5827",
-	email: "hush751001@gmail.com",
-	age: 38
+  name: "ysjung",
+  phoneNumber: "010-4052-5827",
+  email: "hush751001@gmail.com",
+  age: 38
 };
 
 var me2 = {
-	name: "ysjung",
-	team: "Framework Development Team",
-	tel: "02-2101-2707",
-	email: "ysjung@incross.com"
+  name: "ysjung",
+  team: "Framework Development Team",
+  tel: "02-2101-2707",
+  email: "ysjung@incross.com"
 };
 
 var result = _.extend(me1, me2);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var object1 = {
-	apple: 0,
-	banana: {
-		weight: 52,
-		price: 100
-	},
-	cherry: 97
+  apple: 0,
+  banana: {
+    weight: 52,
+    price: 100
+  },
+  cherry: 97
 };
 
 var object2 = {
-	banana: {
-		price: 200
-	},
-	durian: 100
+  banana: {
+    price: 200
+  },
+  durian: 100
 };
 
 var result = _.extend({}, object1, object2);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = $.extend(true, {}, object1, object2);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1520,12 +1608,15 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.pick({
-	name: 'moe',
-	age:50,
-	userid: 'moe1'
-}, 'name', 'age');
+    name: 'ysjung',
+    age:38,
+    userid: 'hush751001'
+  },
+  'name', 'age'
+);
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1541,15 +1632,16 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 // _.extend()와 유사하고 target object에서 정의되지 않은 property만 복사한다.
 
 var iceCream = {
-	flavor: "chocolate"
+  flavor: "chocolate"
 };
 
 var result = _.defaults(iceCream, {
-	flavor: "vanilla",
-	sprinkles: "lots"
+  flavor: "vanilla",
+  sprinkles: "lots"
 });
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1564,10 +1656,10 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <script>
 
 var me1 = {
-	name: "ysjung",
-	phoneNumber: "010-4052-5827",
-	email: "hush751001@gmail.com",
-	age: 38
+  name: "ysjung",
+  phoneNumber: "010-4052-5827",
+  email: "hush751001@gmail.com",
+  age: 38
 };
 
 me2 = _.clone(me1);
@@ -1577,8 +1669,11 @@ me2.age = 36;
 me2.phoneNumber = "011-1701-xxxx";
 me2.email = "itswoong@parang.com";
 
-$("body").append("<li>me1: " + JSON.stringify(me1) + "</li><br/>");
-$("body").append("<li>me2: " + JSON.stringify(me2) + "</li><br/>");
+me1 = JSON.stringify(me1);
+$("body").append("<li>me1: " + me1 + "</li><br/>");
+
+me2 = JSON.stringify(me2);
+$("body").append("<li>me2: " + me2 + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1592,14 +1687,26 @@ The primary purpose of this method is to "tap into" a method chain, in order to 
 </p>
 <textarea class='coder-editor'>
 <script>
-
 var result = _.chain([1,2,3,200])
   .filter(function(num) { return num % 2 == 0; })
   .tap(alert)
   .map(function(num) { return num * num })
   .value();
   
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
+
+/*
+var arr = [1,2,3,200];
+var value;
+
+value = _.filter(arr, function(num) { return num % 2 == 0; });
+alert(value);
+value = _.map(value, function(num) { return num * num });
+
+result = JSON.stringify(value);
+$("body").append("<li>result: " + result + "</li><br/>");
+*/
 </script>
 </textarea>
 </article>
@@ -1613,12 +1720,13 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.has({
-	a: 1,
-	b: 2,
-	c: 3
+  a: 1,
+  b: 2,
+  c: 3
 }, "b");
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1631,21 +1739,25 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </p>
 <textarea class='coder-editor'>
 <script>
-var moe = {
-	name : 'moe',
-	luckyNumbers : [13, 27, 34]
+var ysjung = {
+  name : 'ysjung',
+  luckyNumbers : [13, 27, 34]
 };
 
 var clone = {
-	name : 'moe',
-	luckyNumbers : [13, 27, 34]
+  name : 'ysjung',
+  luckyNumbers : [13, 27, 34]
 };
 
-var result = (moe == clone);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+var result = (ysjung == clone);
 
-result = _.isEqual(moe, clone);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
+
+result = _.isEqual(ysjung, clone);
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1659,19 +1771,23 @@ reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Ref
 </p>
 <textarea class='coder-editor'>
 <script>
-var moe = {
-	name : 'moe'
+var ysjung = {
+  name : 'ysjung'
 };
 
-var result = _.isEmpty(moe);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+var result = _.isEmpty(ysjung);
 
-Object.defineProperty(moe, "name", {
-	enumerable: false
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
+
+Object.defineProperty(ysjung, "name", {
+  enumerable: false
 });
 
-result = _.isEmpty(moe);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = _.isEmpty(ysjung);
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1686,7 +1802,9 @@ reference site: <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.nodeT
 <textarea class='coder-editor'>
 <script>
 var result = _.isElement(jQuery('body')[0]);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1700,12 +1818,16 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = (function(a, b, c){
-	return _.isArray(arguments);
+  return _.isArray(arguments);
 })(1, 2, 3);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 result = _.isArray([1,2,3]);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1719,10 +1841,14 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.isObject({});
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isObject(1);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1736,12 +1862,16 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = (function(a, b, c){
-	return _.isArguments(arguments);
+  return _.isArguments(arguments);
 })(1, 2, 3);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 result = _.isArguments([1,2,3]);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1755,7 +1885,9 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.isFunction(alert);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1768,8 +1900,10 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </p>
 <textarea class='coder-editor'>
 <script>
-var result = _.isString("moe");
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+var result = _.isString("ysjung");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1784,7 +1918,8 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <script>
 var result = _.isNumber(8.4 * 5);
 
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1799,16 +1934,24 @@ reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Ref
 <textarea class='coder-editor'>
 <script>
 var result = _.isFinite(-101);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isFinite(-Infinity);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isFinite(101/0);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isFinite(1000000/Infinity);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1822,7 +1965,9 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.isBoolean(false);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1836,7 +1981,9 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.isDate(new Date());
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1849,12 +1996,16 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </p>
 <textarea class='coder-editor'>
 <script>
-var result = _.isRegExp(/moe/);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+var result = _.isRegExp(/ysjung/);
 
-var re = new RegExp("moe");
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
+
+var re = new RegExp("ysjung");
 var result = _.isRegExp(re);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1869,14 +2020,20 @@ reference site: <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Ref
 <textarea class='coder-editor'>
 <script>
 var result = _.isNaN(NaN);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 // undefined, 0, null, "", false
 result = _.isNaN(undefined);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 result = _.isNaN(parseInt("HaHa"));
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1890,10 +2047,14 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.isNull(null);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isNull(undefined);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1907,17 +2068,23 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var obj1 = {
-	name: "ysjung"
+  name: "ysjung"
 };
 
 var result = _.isUndefined(obj1.phoneNumber);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isUndefined(undefined);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.isUndefined();
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1932,10 +2099,19 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var underscore = _.noConflict();
-$("body").append("<li>underscore: " + JSON.stringify(_) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = underscore.functions(underscore);
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
+
+/*
+result = JSON.stringify(_);
+$("body").append("<li>_ : " + result + "</li><br/>");
+*/
 </script>
 </textarea>
 </article>
@@ -1948,14 +2124,16 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </p>
 <textarea class='coder-editor'>
 <script>
-var moe = {name : 'moe'};
-var result = (moe === _.identity(moe));
+var ysjung = {name : 'ysjung'};
+var result = (ysjung === _.identity(ysjung));
 /*
 _.indentity = function(value) {
 	return value;
 }
 */
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -1968,15 +2146,14 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </p>
 <textarea class='coder-editor'>
 <script>
-// 갑자기 _()는 왜 나왔나?
 _(3).times(function(index){ 
-	$("body").append("<li>[" + index + "] called.</li>");
+  $("body").append("<li>[" + index + "] called.</li>");
 });
 
 $("body").append("<br/>");
 
 _.times(10, function(index) {
-	$("body").append("<li>[" + index + "] called.</li>");
+  $("body").append("<li>[" + index + "] called.</li>");
 });
 </script>
 </textarea>
@@ -2014,10 +2191,14 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _.uniqueId('contact_');
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 
 var result = _.uniqueId('ysjung_');
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -2030,8 +2211,10 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </p>
 <textarea class='coder-editor'>
 <script>
-var result = _.escape('Curly, Larry & Moe');
-$("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
+var result = _.escape('ysjung, itswoong & naksun');
+
+result = JSON.stringify(result);
+$("body").append("<li>result: " + result + "</li><br/>");
 </script>
 </textarea>
 </article>
@@ -2045,10 +2228,10 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var object = {
-	cheese: 'crumpets',
-	stuff: function(){
-		return 'nonsense';
-	}
+  cheese: 'crumpets',
+  stuff: function(){
+    return 'nonsense';
+  }
 };
 
 var result = _.result(object, 'cheese');
@@ -2080,31 +2263,32 @@ interpolate: /<%=([\s\S]+?)%>/g,
 escape: /<%-([\s\S]+?)%>/g
 }
 */
-var compiled = _.template("I'm <%= name %>. I've two sons.<br/>First son's name is <%= sons[0].name %>. Second son's name is <%= sons[1].name %>.");
+var compiled = _.template(
+	"I'm <%= name %>. I've two sons.<br/>\
+First son's name is <%= sons[0].name %>.<br/>\
+Second son's name is <%= sons[1].name %>.");
 var result = compiled({
-	name: 'ysjung',
-	sons: [
-		{
-			name: "jhjung"		
-		},
-		{
-			name: "mwjung"
-		}
-	]
+  name: 'ysjung',
+  sons: [
+    {
+      name: "jhjung"		
+    },
+    {
+      name: "mwjung"
+    }
+  ]
 });
-
-var a = compiled.source;
 
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 
 var list = "<% _.each(people, function(name) { %> \
-	<li> \
-		<%= name %>	\
-	</li> \
+  <li> \
+    <%= name %>	\
+  </li> \
 <% }); %>";
 	
 result = _.template(list, {
-	people: ['moe', 'curly', 'larry']
+	people: ['ysjung', 'itswoong', 'naksun']
 });
 $("body").append("<li>result: <ul>" + result + "</ul></li><br/>");
 
@@ -2126,29 +2310,20 @@ $("body").append("<li>result: " + result + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var stooges = [
-	{
-		name : 'curly',
-		age : 25
-	},
-	{
-		name : 'moe',
-		age : 21
-	},
-	{
-		name : 'larry',
-		age : 23
-	}
+  { name : 'ysjung', age : 38 },
+  { name : 'naksun', age : 34 },
+  { name : 'itswoong', age : 36 }
 ];
 
 var youngest = _.chain(stooges)
-	.sortBy(function(stooge) {
-		return stooge.age;
-	})
-	.map(function(stooge) {
-		return stooge.name + ' is ' + stooge.age;
-	})
-	.first()
-	.value();
+  .sortBy(function(stooge) {
+    return stooge.age;
+  })
+  .map(function(stooge) {
+    return stooge.name + ' is ' + stooge.age;
+  })
+  .first()
+  .value();
 
 $("body").append("<li>youngest: " + JSON.stringify(youngest) + "</li><br/>");
 </script>
@@ -2164,9 +2339,11 @@ $("body").append("<li>youngest: " + JSON.stringify(youngest) + "</li><br/>");
 <textarea class='coder-editor'>
 <script>
 var result = _([1, 2, 3]).value();
+
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 
 var result = _.value([1, 2, 3]);	// 없다.
+
 $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </script>
 </textarea>
@@ -2190,7 +2367,7 @@ $("body").append("<li>result: " + JSON.stringify(result) + "</li><br/>");
 </article>
 
 
-<script src='lib/coderdeck.min.js'></script>
+<script src='lib/coderdeck.js'></script>
 
 <script>
 	$(function() {
